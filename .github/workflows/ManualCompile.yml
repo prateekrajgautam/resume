@@ -1,0 +1,56 @@
+name: "Manually Compile Resume"
+
+on: workflow_dispatch
+ 
+
+
+defaults:
+  run:
+    working-directory: 01_PRG_Resume_2023
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    container: texlive/texlive:latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: list dir and change to workdir
+        run: |
+          ls -a
+          pwd
+          env
+
+      - name: Remove old files
+        run: |
+          rm -rf PDF
+
+      - name: Install PDF 2 PPM
+        run: |
+          apt-get update -y
+          apt-get install poppler-utils -y
+
+      - name: create DIR
+        run: |
+          mkdir PDF
+
+      - name: Compile with script
+        run: |
+          chmod +x ./compileAll.sh
+          chmod +x ./CleanUpAux.sh
+          echo RUN SCRIPT
+          ./compileAll.sh
+          cd PDF
+          echo " "
+          echo content of PDF Folder
+          pwd
+          ls -a
+          cd ..
+          env
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: updatedResume
+          path: ./01_PRG_Resume_2023/PDF

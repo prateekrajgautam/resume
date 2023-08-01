@@ -1,0 +1,142 @@
+name: Auto Compile Resume on change in tex bib cls sty md yml and yaml
+
+on:
+  push:
+    branches: [master, main]
+    paths:
+      - "**/*.tex"
+      - "**/*.bib"
+      - "**/*.cls"
+      - "**/*.sty"
+      - "**/*.md"
+      - "**/*.yml"
+      - "**/*.yaml"
+
+# defaults:
+#   run:
+#     working-directory: work_folder
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    container: texlive/texlive:latest
+    steps:
+      # - name: Checkout repo
+      #   uses: actions/checkout@v3
+      #   with:
+      #     ssh-key: ${{ secrets.SSH_KEY }}
+
+      - name: Install requirement from apt
+        run: |
+          apt-get update -y
+          apt-get install poppler-utils -y
+
+      - name: Clone repo manually
+        run: |
+          ls -a
+          pwd
+          git clone https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/prateekrajgautam/resume.git
+          ls -a
+          pwd
+          cd resume
+          ls -a
+          git config user.email "prateekrajgautam@gmail.com"
+          git config user.name "prateekrajgautam"
+
+      - name: List dir and change to workdir
+        run: |
+          ls -a
+          pwd
+          cd resume
+          ls -a
+          pwd
+          cd work_folder
+          ls
+          pwd
+
+      - name: Remove old files in /PDF
+        run: |
+          pwd
+          ls -a
+          cd resume
+          cd work_folder
+          rm -rf PDF
+
+      - name: create DIR /PDF
+        run: |
+          pwd
+          cd resume
+          cd work_folder
+          pwd
+          mkdir PDF
+
+      - name: Compile LaTeX files with script
+        run: |
+          pwd
+          cd resume
+          cd work_folder
+          pwd
+          chmod +x ./compileAll.sh
+          chmod +x ./CleanUpAux.sh
+          echo RUN SCRIPT
+          ./compileAll.sh
+          cd PDF
+          echo " "
+          echo content of PDF Folder
+          pwd
+          ls -a
+          cd ..
+          env
+
+      - name: Clone prateekrajgautam.github.io and mark safe
+        run: |
+          ls -a
+          pwd
+          git clone https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/prateekrajgautam/prateekrajgautam.github.io.git
+          cd prateekrajgautam.github.io
+          ls -a
+          pwd | xargs -i{} git config --global --add safe.directory {}
+          git config user.email "prateekrajgautam@gmail.com"
+          git config user.name "prateekrajgautam"
+
+      - name: copy resume/../PDF to prateekrajgautam.github.io/V01
+        run: |
+          pwd
+          rm ./prateekrajgautam.github.io/V01 -rf
+          mkdir ./prateekrajgautam.github.io/V01
+          cp ./resume/work_folder/PDF/* ./prateekrajgautam.github.io/V01 -r
+
+      - name: push to prateekrajgautam.github.io
+        run: |
+          cd prateekrajgautam.github.io
+          git status
+          git add .
+          git commit -a -m "Auto Update from resume action"
+          git push
+          git status
+
+      - name: Update submodule resume/prateekrajgautam.github.io
+        run: |
+          cd resume
+          git submodule 
+          cd prateekrajgautam.github.io
+          git pull
+
+      - name: git push PDF and updated submodule to resume
+        run: |
+          pwd
+          cd resume
+          pwd | xargs -i{} git config --global --add safe.directory {}
+          git config user.email "prateekrajgautam@gmail.com"
+          git config user.name "prateekrajgautam"
+          git status
+          git add .
+          git commit -am "AutoUpdatePDF"
+          git push
+          git status
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: updatedResume
+          path: ./work_folder/PDF

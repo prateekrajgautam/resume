@@ -1,0 +1,127 @@
+
+
+
+\documentclass[mm,9pt,a4paper]{simple_style}  
+
+\usepackage[pscoord]{eso-pic}
+%%%\usepackage{qrcode}
+%%%\newcommand{\myqr}{\qrcode{https://prateekrajgautam.github.io/}}
+%%%
+%%%\newcommand\BackgroundPic{%
+%%%%    \put(-10,-65){%
+%%%	\put(122,-10){
+%%%        \parbox[b][\paperheight]{\paperwidth}{%
+%%%            %           \vfill
+%%%            \centering
+%%%	      \myqr
+%%%            \vfill
+%%%}}}
+%%%
+%%%
+%%%\AddToShipoutPictureBG*{%
+%%%\BackgroundPic
+%%%}
+
+
+
+\usepackage[
+   backend=biber,
+    style=ieee,
+    url=false,
+    doi=true,
+    isbn=false,
+    eprint=false,
+	dashed=false,
+	maxbibnames=5, 
+	maxcitenames=4, 
+	mincitenames=4,
+	autolang=hyphen
+  ]{biblatex}
+  
+%\addbibresource{journals.bib}
+%\addbibresource{conferences.bib}
+\addbibresource{./includes/_publications.bib}
+
+%ISSN link
+\newcommand{\issn}[1]{{\small{issn \href{https://portal.issn.org/resource/ISSN/\usebibentry{#1}{issn}}{\usebibentry{#1}{issn}}}}}
+
+%WOS link from MJL
+\newcommand{\wos}[1]{\hfill\textbf{\href{https://mjl.clarivate.com:/search-results?issn=\usebibentry{#1}{issn}}{\usebibentry{#1}{index}}}}
+
+%Scopus link 
+\newcommand{\scopus}[1]{\hfill\textbf{\href{https://www.scopus.com/sources.uri?issn=\usebibentry{#1}{issn}}{\usebibentry{#1}{index}}}}
+
+\newcommand{\scopusc}[1]{\hfill\textbf{\href{\usebibentry{#1}{proof}}{\usebibentry{#1}{index}}}}
+
+ \newcommand{\citet}[1]{\textcite{#1}}
+\newcommand{\citep}[1]{\parencite{#1}}
+
+\newcommand{\bibentry}[1]{\fullcite{#1} {\small{isbn: \usebibentry{#1}{isbn}}} \issn{#1}\scopus{#1}
+}
+\newcommand{\sbibentry}[1]{\fullcite{#1} {\small{isbn: \usebibentry{#1}{isbn}}} \issn{#1}\scopusc{#1}
+}
+
+
+\newcommand{\pubEntry}[1]{\fullcite{#1} \issn{#1} \textbf{Impact Factor:} \cusemph{\usebibentry{#1}{if}}\hfill\textbf{\wos{#1}}
+}
+
+\newcommand{\epubEntry}[1]{\fullcite{#1} \issn{#1} \hfill\textbf{\wos{#1}}
+}
+
+\newcommand{\spubEntry}[1]{\fullcite{#1} \issn{#1} \scopus{#1}
+}
+
+\long\def\referenceFileName {./includes/_publications}
+
+\RequirePackage{usebib}
+\newbibfield{doi}
+\newbibfield{if}
+\newbibfield{index}
+\newbibfield{issn}
+\newbibfield{isbn}
+\newbibfield{proof}
+\bibinput{./includes/_publications}
+
+
+
+
+% Default font is the helvetica postscript font
+\usepackage{helvet,enumitem}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{xcolor}
+\hypersetup {
+    colorlinks=true,
+    linkcolor=colorlink,
+    filecolor=magenta,      
+    urlcolor=colorlink,
+}
+\usepackage[left=0.7in, right=2in, top=0.9in]{geometry}
+
+% Increase text height
+\textheight=700pt
+
+
+
+
+%-------------------------------------------------------------------------------
+%	NAME AND ADDRESS SECTION
+%-------------------------------------------------------------------------------
+\name{Dr. Prateek Raj Gautam}
+\qualification{Ph.D.,Electronics and Communication Engineering,\\ Motilal Nehru National Institute of Technology Allahabad}
+\emailone{prateekrajgautam@gmail.com}
+%\emailtwo{rel1601@mnnit.ac.in}
+%\website{http://mnnit.ac.in/}{\url{fb.com/prateekrajgautam}}
+%\github{https://github.com/prateekrajgautam}{\url{https://github.com/prateekrajgautam}}
+\phone{\href{https://t.me/prateekrajgautam}{+91 - 9151404899}}
+\address{E\ 540/9 Avas Vikas -- 1\\ Kalyanpur, Kanpur U.P. (208017) India}
+%-------------------------------------------------------------------------------
+\begin{document}
+\section{List of publications}
+\subsection{Journals}
+\input{./includes/_ListOfPublications.tex}
+\vfill
+\hfill Date: \today
+\nocite{*}
+%\printbibliography
+\end{document}
