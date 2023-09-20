@@ -14,6 +14,7 @@ for f in ${files[@]}; do
 
 done
 sudo apt install poppler-utils
+nix-shell -p poppler-utils
 PDF="./Dr.PrateekRajGautam_Resume_2023_V01.pdf"
 echo "Converting "$PDF" to image"
 cd PDF
