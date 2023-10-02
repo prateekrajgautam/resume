@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 files=(ListOfPublicationsOnly PlainListOfPublicationsOnly Dr.PrateekRajGautam_Resume_2023_V01 Dr.PrateekRajGautam_Resume_2023_V01_schooling)
 rm PDF -rf
 mkdir PDF
