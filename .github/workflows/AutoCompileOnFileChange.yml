@@ -21,14 +21,12 @@ jobs:
     runs-on: ubuntu-latest
     container: texlive/texlive:latest
     steps:
-      # - name: Checkout repo
-      #   uses: actions/checkout@v3
-      #   with:
-      #     ssh-key: ${{ secrets.SSH_KEY }}
-      #- name: Nix Shell
-        # You may pin to the exact commit or the version.
-        # uses: workflow/nix-shell-action@30b994036de138cbbd60454713e1060d8aed1acd
-        #uses: workflow/nix-shell-action@v3.3.0
+      - name: Install Nix
+        uses: cachix/install-nix-action@v27
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          ssh-key: ${{ secrets.SSH_KEY }}
       - name: Install requirement from apt
         run: |
           apt-get update -y
