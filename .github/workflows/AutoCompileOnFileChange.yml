@@ -22,11 +22,11 @@ jobs:
     runs-on: ubuntu-latest
     container: texlive/texlive:latest
     steps:
-      - name: Install Nix
-        uses: cachix/install-nix-action@v27
-        with:
-          nix_path: nixpkgs=channel:nixos-unstable
-      - run: nix-build
+      #      - name: Install Nix
+      # uses: cachix/install-nix-action@v27
+      # with:
+      #   nix_path: nixpkgs=channel:nixos-unstable
+      # - run: nix-build
 
 
 
