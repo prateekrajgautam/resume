@@ -36,8 +36,9 @@ jobs:
           ssh-key: ${{ secrets.SSH_KEY }}
       - name: Install requirement from apt
         run: |
-          apt-get update -y
-          apt-get install poppler-utils -y
+          apt update -y
+          apt install sudo -y
+          apt install poppler-utils -y
 
       - name: Clone repo manually
         run: |
@@ -119,7 +120,7 @@ jobs:
           cd prateekrajgautam.github.io
           git status
           git add .
-          git commit -a -m "Auto Update from resume action"
+          git commit -m "Auto Update from resume action"
           git push
           git status
 
