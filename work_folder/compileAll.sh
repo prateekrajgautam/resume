@@ -16,5 +16,5 @@ for f in $files; do
 
 done
 
-./pdftopng
+./pdftopng.sh
 

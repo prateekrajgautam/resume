@@ -118,6 +118,9 @@ jobs:
       - name: push to prateekrajgautam.github.io
         run: |
           cd prateekrajgautam.github.io
+          pwd | xargs -i{} git config --global --add safe.directory {}
+          git config user.email "prateekrajgautam@gmail.com"
+          git config user.name "prateekrajgautam"
           git status
           git add .
           git commit -m "Auto Update from resume action"
@@ -140,7 +143,7 @@ jobs:
           git config user.name "prateekrajgautam"
           git status
           git add .
-          git commit -am "AutoUpdatePDF"
+          git commit -m "AutoUpdatePDF"
           git push
           git status
 
