@@ -1,0 +1,38 @@
+[0] Config.pm:308> INFO - This is Biber 2.20
+[0] Config.pm:311> INFO - Logfile is './ListOfPublicationsOnly.blg'
+[50] biber:340> INFO - === Sat Jul 27, 2024, 10:09:02
+[63] Biber.pm:420> INFO - Reading './ListOfPublicationsOnly.bcf'
+[116] Biber.pm:991> INFO - Using all citekeys in bib section 0
+[126] Biber.pm:4463> INFO - Processing section 0
+[134] Biber.pm:4654> INFO - Looking for bibtex file './includes/_publications.bib' for section 0
+[137] bibtex.pm:1713> INFO - LaTeX decoding ...
+[179] bibtex.pm:1519> INFO - Found BibTeX data source './includes/_publications.bib'
+[435] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[435] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[435] Biber.pm:4283> INFO - Sorting list 'none/global//global/global/global' of type 'entry' with template 'none' and locale 'en-US'
+[435] Biber.pm:4289> INFO - No sort tailoring available for locale 'en-US'
+[453] bbl.pm:676> INFO - Writing './ListOfPublicationsOnly.bbl' with encoding 'UTF-8'
+[465] bbl.pm:779> INFO - Output to ./ListOfPublicationsOnly.bbl
+[465] Biber.pm:131> WARN - legacy month field 'apr' in entry 'J8' is not an integer - this will probably not sort properly.
+[465] Biber.pm:131> WARN - legacy month field 'apr' in entry 'J7' is not an integer - this will probably not sort properly.
+[465] Biber.pm:131> WARN - legacy month field 'jun' in entry 'J5' is not an integer - this will probably not sort properly.
+[465] Biber.pm:131> WARN - legacy month field 'jun' in entry 'J4' is not an integer - this will probably not sort properly.
+[465] Biber.pm:131> WARN - legacy month field 'Dec' in entry 'C9' is not an integer - this will probably not sort properly.
+[465] Biber.pm:131> WARN - legacy month field 'may' in entry 'J3' is not an integer - this will probably not sort properly.
+[465] Biber.pm:131> WARN - legacy month field 'feb' in entry 'S2' is not an integer - this will probably not sort properly.
+[465] Biber.pm:131> WARN - legacy month field 'jun' in entry 'S1' is not an integer - this will probably not sort properly.
+[465] Biber.pm:131> WARN - legacy month field 'Jul' in entry 'J14' is not an integer - this will probably not sort properly.
+[466] Biber.pm:131> WARN - legacy month field 'Aug' in entry 'J10' is not an integer - this will probably not sort properly.
+[466] Biber.pm:131> WARN - legacy month field 'dec' in entry 'C2' is not an integer - this will probably not sort properly.
+[466] Biber.pm:131> WARN - legacy month field 'nov' in entry 'C1' is not an integer - this will probably not sort properly.
+[466] Biber.pm:131> WARN - legacy month field 'nov' in entry 'J1' is not an integer - this will probably not sort properly.
+[466] Biber.pm:131> WARN - legacy month field 'dec' in entry 'C4' is not an integer - this will probably not sort properly.
+[466] Biber.pm:131> WARN - legacy month field 'sep' in entry 'J9' is not an integer - this will probably not sort properly.
+[466] Biber.pm:131> WARN - legacy month field 'may' in entry 'J6' is not an integer - this will probably not sort properly.
+[466] Biber.pm:131> WARN - legacy month field 'jun' in entry 'J11' is not an integer - this will probably not sort properly.
+[466] Biber.pm:131> WARN - article entry 'J11' (./includes/_publications.bib): Invalid format '24 June 2020' of date field 'date' - ignoring
+[466] Biber.pm:131> WARN - legacy month field 'aug' in entry 'S3' is not an integer - this will probably not sort properly.
+[466] Biber.pm:131> WARN - legacy month field 'nov' in entry 'C5' is not an integer - this will probably not sort properly.
+[466] Biber.pm:131> WARN - legacy month field 'mar' in entry 'S4' is not an integer - this will probably not sort properly.
+[466] Biber.pm:131> WARN - BibTeX subsystem: /tmp/biber_tmp_9wur/07b0cf7583ed4d9049c7370971a47cc9_371.utf8, line 430, warning: 3 characters of junk seen at toplevel
+[466] Biber.pm:133> INFO - WARNINGS: 22
