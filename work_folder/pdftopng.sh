@@ -10,5 +10,6 @@ pdftoppm -png -r 300 $PDF PNG
 cd ..
 echo "\n Command Completed"
 
+ls *.png | xargs -I {} echo {} > imagelist.txt
 
 
