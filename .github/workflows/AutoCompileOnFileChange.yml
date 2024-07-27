@@ -85,6 +85,7 @@ jobs:
           pwd
           cd resume
           cd work_folder
+          find . -name "*^M" | while read f; do mv "$f" "$(echo $f | sed 's/^M//')"; done
           pwd
           ls -a
           chmod +x ./compileAll.sh
