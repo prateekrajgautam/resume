@@ -92,6 +92,7 @@ jobs:
           chmod +x ./CleanUpAux.sh
           echo RUN SCRIPT
           ./compileAll.sh
+          ./pdftopng.sh
           cd PDF
           echo " "
           echo content of PDF Folder
