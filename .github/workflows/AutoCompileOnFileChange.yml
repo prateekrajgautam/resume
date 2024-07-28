@@ -92,14 +92,21 @@ jobs:
           chmod +x ./CleanUpAux.sh
           echo RUN SCRIPT
           ./compileAll.sh
-          ./pdftopng.sh
-          cd PDF
-          echo " "
-          echo content of PDF Folder
+          
+
+      - name: pdf to png using popper-utils
+        run: |
           pwd
-          ls -a
-          cd ..
-          env
+          cd resume
+          cd work_folder
+          cd PDF
+          apt install poppler-utils -y
+          PDF="./Dr.PrateekRajGautam_Resume_2023_V01.pdf"
+          echo "Converting "$PDF" to image"
+          pdftoppm -png -r 300 $PDF PNG
+          echo "\n Command Completed"
+          ls *.png | xargs -I {} echo {} > imagelist.txt
+
 
       - name: Clone prateekrajgautam.github.io and mark safe
         run: |
