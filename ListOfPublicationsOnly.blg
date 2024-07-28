@@ -1,0 +1,5 @@
+[0] Config.pm:307> INFO - This is Biber 2.19
+[0] Config.pm:310> INFO - Logfile is './ListOfPublicationsOnly.blg'
+[114] biber:340> INFO - === Mon Jul 29, 2024, 00:29:03
+[253] Utils.pm:410> ERROR - Cannot find './ListOfPublicationsOnly.bcf'!
+[253] Biber.pm:136> INFO - ERRORS: 1
