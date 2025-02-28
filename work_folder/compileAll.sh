@@ -1,5 +1,5 @@
 #!/bin/sh
-files="ListOfPublicationsOnly PlainListOfPublicationsOnly Dr.PrateekRajGautam_Resume_2024_V01 Dr.PrateekRajGautam_Resume_2024_V01_schooling"
+files="ListOfPublicationsOnly PlainListOfPublicationsOnly Dr.PrateekRajGautam_Resume_2025_V01 Dr.PrateekRajGautam_Resume_2025_V01_schooling"
 #files=(ListOfPublicationsOnly PlainListOfPublicationsOnly Dr.PrateekRajGautam_Resume_2024_V01 Dr.PrateekRajGautam_Resume_2024_V01_schooling)
 rm PDF -rf
 mkdir PDF

@@ -101,7 +101,7 @@ jobs:
           cd work_folder
           cd PDF
           apt install poppler-utils -y
-          PDF="./Dr.PrateekRajGautam_Resume_2024_V01.pdf"
+          PDF="./Dr.PrateekRajGautam_Resume_2025_V01.pdf"
           echo "Converting "$PDF" to image"
           pdftoppm -png -r 300 $PDF PNG
           echo "\n Command Completed"
