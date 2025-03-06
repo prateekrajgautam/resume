@@ -23,11 +23,11 @@ jobs:
 
       - name: Install requirement from apt
         run: |
-          apt update -y
-          apt install sudo -y
-          sudo apt install poppler-utils -y
-          git config user.email "prateekrajgautam@gmail.com"
-          git config user.name "prateekrajgautam"
+          # apt update -y
+          # apt install sudo -y
+          # sudo apt install poppler-utils -y
+          # git config user.email "prateekrajgautam@gmail.com"
+          # git config user.name "prateekrajgautam"
           ls -a
           pwd
       - uses: cachix/install-nix-action@v18
