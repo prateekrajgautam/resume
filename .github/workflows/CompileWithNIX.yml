@@ -85,8 +85,13 @@ jobs:
       - name: pdf to png using popper-utils
         run: |
             pwd
+            ls -a
             cd resume
+            pwd 
+            la -a
             cd work_folder
+            pwd 
+            ls -a
             cd PDF
             apt install poppler-utils -y
             PDF="./Dr.PrateekRajGautam_Resume_2025_V01.pdf"
