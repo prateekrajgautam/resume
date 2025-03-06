@@ -1,0 +1,158 @@
+name: 'Auto Compile With NIX'
+on:
+  push:
+    branches: [master, main]
+    paths:
+      - "**/*.tex"
+      - "**/*.bib"
+      - "**/*.cls"
+      - "**/*.sty"
+      - "**/*.md"
+      - "**/*.yml"
+      - "**/*.yaml"
+  workflow_dispatch:
+
+
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        # with: ${{ secrets.SSH_KEY }}
+
+      - name: Install requirement from apt
+        run: |
+          apt update -y
+          apt install sudo -y
+          apt install poppler-utils -y
+          git config user.email "prateekrajgautam@gmail.com"
+          git config user.name "prateekrajgautam"
+          ls -a
+          pwd
+      - uses: cachix/install-nix-action@v18
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+      - uses: workflow/nix-shell-action@v3
+        with:
+          packages: texlive, poppler_utils
+          script: |
+            hello
+            docker --help
+    
+      - name: List dir and change to workdir
+        run: |
+            ls -a
+            pwd
+            cd resume
+            ls -a
+            pwd
+            cd work_folder
+            ls
+            pwd
+
+      - name: Remove old files in /PDF
+        run: |
+            pwd
+            ls -a
+            cd resume
+            cd work_folder
+            rm -rf PDF
+
+      - name: create DIR /PDF
+        run: |
+            pwd
+            cd resume
+            cd work_folder
+            pwd
+            ls -a
+            mkdir PDF
+
+      - name: Compile LaTeX files with script
+        run: |
+            pwd
+            cd resume
+            cd work_folder
+            find . -name "*^M" | while read f; do mv "$f" "$(echo $f | sed 's/^M//')"; done
+            pwd
+            ls -a
+            chmod +x ./compileAll.sh
+            chmod +x ./CleanUpAux.sh
+            echo RUN SCRIPT
+            ./compileAll.sh
+            
+
+      - name: pdf to png using popper-utils
+        run: |
+            pwd
+            cd resume
+            cd work_folder
+            cd PDF
+            apt install poppler-utils -y
+            PDF="./Dr.PrateekRajGautam_Resume_2025_V01.pdf"
+            echo "Converting "$PDF" to image"
+            pdftoppm -png -r 300 $PDF PNG
+            echo "\n Command Completed"
+            ls *.png | xargs -I {} echo {} > imagelist.txt
+
+
+      - name: Clone prateekrajgautam.github.io and mark safe
+        run: |
+            ls -a
+            pwd
+            git clone https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/prateekrajgautam/prateekrajgautam.github.io.git
+            cd prateekrajgautam.github.io
+            ls -a
+            pwd | xargs -i{} git config --global --add safe.directory {}
+            git config user.email "prateekrajgautam@gmail.com"
+            git config user.name "prateekrajgautam"
+
+      - name: copy resume/../PDF to prateekrajgautam.github.io/V01
+        run: |
+            pwd
+            rm ./prateekrajgautam.github.io/V01 -rf
+            mkdir ./prateekrajgautam.github.io/V01
+            cp ./resume/work_folder/PDF/* ./prateekrajgautam.github.io/V01 -r
+
+      - name: push to prateekrajgautam.github.io
+        run: |
+            cd prateekrajgautam.github.io
+            pwd | xargs -i{} git config --global --add safe.directory {}
+            git config user.email "prateekrajgautam@gmail.com"
+            git config user.name "prateekrajgautam"
+            git status
+            git add .
+            git status
+            git commit -m "Auto Update from resume action"
+            #echo "Old repo" && git remote -v
+            #git remote set-url origin https://prateekrajgautam:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/prateekrajgautam/prateekrajgautam.github.io.git
+            #echo "Reupdated repo" && git remote -v
+            git push
+            git status
+
+      - name: Update submodule resume/prateekrajgautam.github.io
+        run: |
+            cd resume
+            git submodule 
+            cd prateekrajgautam.github.io
+            git pull
+
+      - name: git push PDF and updated submodule to resume
+        run: |
+            pwd
+            cd resume
+            pwd | xargs -i{} git config --global --add safe.directory {}
+            git config user.email "prateekrajgautam@gmail.com"
+            git config user.name "prateekrajgautam"
+            git status
+            git add .
+            git status
+            git commit -m "AutoUpdatePDF"
+            git push
+            git status
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4.3.4
+        with:
+            name: updatedResume
+            path: ./work_folder/PDF
