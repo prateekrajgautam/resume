@@ -19,17 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        # with: ${{ secrets.SSH_KEY }}
+        with: ${{ secrets.SSH_KEY }}
 
-      - name: Install requirement from apt
-        run: |
-          # apt update -y
-          # apt install sudo -y
-          # sudo apt install poppler-utils -y
-          # git config user.email "prateekrajgautam@gmail.com"
-          # git config user.name "prateekrajgautam"
-          ls -a
-          pwd
+      # - name: Install requirement from apt
+      
       - uses: cachix/install-nix-action@v18
         with:
           nix_path: nixpkgs=channel:nixos-unstable
@@ -40,67 +33,15 @@ jobs:
             hello
             docker --help
     
-      - name: List dir and change to workdir
-        run: |
-            ls -a
-            pwd
-            cd resume
-            ls -a
-            pwd
-            cd work_folder
-            ls
-            pwd
-
-      - name: Remove old files in /PDF
-        run: |
-            pwd
-            ls -a
-            cd resume
-            cd work_folder
-            rm -rf PDF
-
-      - name: create DIR /PDF
-        run: |
-            pwd
-            cd resume
-            cd work_folder
-            pwd
-            ls -a
-            mkdir PDF
-
+      
       - name: Compile LaTeX files with script
         run: |
-            pwd
-            cd resume
             cd work_folder
-            find . -name "*^M" | while read f; do mv "$f" "$(echo $f | sed 's/^M//')"; done
-            pwd
-            ls -a
             chmod +x ./compileAll.sh
             chmod +x ./CleanUpAux.sh
             echo RUN SCRIPT
             ./compileAll.sh
             
-
-      - name: pdf to png using popper-utils
-        run: |
-            pwd
-            ls -a
-            cd resume
-            pwd 
-            la -a
-            cd work_folder
-            pwd 
-            ls -a
-            cd PDF
-            apt install poppler-utils -y
-            PDF="./Dr.PrateekRajGautam_Resume_2025_V01.pdf"
-            echo "Converting "$PDF" to image"
-            pdftoppm -png -r 300 $PDF PNG
-            echo "\n Command Completed"
-            ls *.png | xargs -I {} echo {} > imagelist.txt
-
-
       - name: Clone prateekrajgautam.github.io and mark safe
         run: |
             ls -a

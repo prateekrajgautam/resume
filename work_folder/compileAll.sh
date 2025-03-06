@@ -19,12 +19,7 @@ done
 cp ./pdftopng.sh ./PDF/pdftopng.sh
 
 cd PDF
-
-
-
 ./pdftopng.sh
-
-
 rm ./pdftopng.sh
 
 cd ..
