@@ -1,4 +1,4 @@
-name: 'Auto Compile With NIX'
+name: 'Auto Compile With NIX may2025'
 on:
   push:
     branches: [master, main]
@@ -11,8 +11,8 @@ on:
       - "**/*.yml"
       - "**/*.yaml"
   workflow_dispatch:
-
-
+  schedule:
+    - cron: '0 0 * * 1' # every Monday at midnight
 
 jobs:
   tests:
