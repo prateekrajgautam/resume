@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with: ${{ secrets.SSH_KEY }}
+        # with: ${{ secrets.SSH_KEY }}
 
       # - name: Install requirement from apt
       
