@@ -1,11 +1,11 @@
 #!/bin/sh
-files="ListOfPublicationsOnly PlainListOfPublicationsOnly Dr.PrateekRajGautam_Resume_2025_V01 Dr.PrateekRajGautam_Resume_2025_V01_schooling"
+files="ListOfPublicationsOnly PlainListOfPublicationsOnly Dr.PrateekRajGautam_Resume_2026_V01 Dr.PrateekRajGautam_Resume_2026_V01_schooling"
 #files=(ListOfPublicationsOnly PlainListOfPublicationsOnly Dr.PrateekRajGautam_Resume_2024_V01 Dr.PrateekRajGautam_Resume_2024_V01_schooling)
-rm PDF -rf
-mkdir PDF
+rm -rf "./PDF"
+mkdir -p "PDF"
 
 for f in $files; do
-#for f in ${files[@]}; do
+	#for f in ${files[@]}; do
     echo Compiling $f
     pdflatex "./"$f".tex"
     biber ./$f
@@ -13,7 +13,6 @@ for f in $files; do
     pdflatex ./$f".tex"
     ./CleanUpAux.sh
     mv "./"$f".pdf" "./PDF/"$f".pdf"
-
 done
 
 cp ./pdftopng.sh ./PDF/pdftopng.sh
