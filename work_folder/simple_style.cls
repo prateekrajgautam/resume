@@ -249,7 +249,7 @@
 	  \textwidth{\hfil\@detailsbox{\@addressone\\
 			              Email : \@emailone\  \@emailtwo\\
 				       Webpage : \@website\\
-%				       Github : \@github\\
+				       Github : \@github\\
 				      Mobile : \@phone\\\\}}\par
   }%
   % Add a horizontal line after name
