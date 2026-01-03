@@ -7,7 +7,7 @@ pkgs.mkShell{
 	name = "buildResume";
 
 
-	buildInputs = [ pkgs.texliveFull pkgs.poppler_utils];
+	buildInputs = [ pkgs.texliveFull pkgs.poppler-utils];
 
 
 
