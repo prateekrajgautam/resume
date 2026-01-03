@@ -2,17 +2,19 @@
 let
 message = "hi";
 in
-pkgs.mkShellNoCC{
+pkgs.mkShell{
 
 	name = "buildResume";
 
 
-	buildInputs = [ pkgs.vscodium pkgs.texliveFull pkgs.poppler_utils];
+	buildInputs = [ pkgs.texliveFull pkgs.poppler_utils];
 
 
 
 	shellHook = ''
-	./compileAll.sh
+	ls -al
+	pwd
+	#./compileAll.sh
 	'';
 
 
