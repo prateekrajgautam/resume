@@ -44,19 +44,19 @@ pipeline {
                 echo 'Deploying...'
                 sh '''
                     nix-shell --run "
-			echo "cloning prateekrajgautam.github.io"
+			echo 'cloning prateekrajgautam.github.io'
                         git config --global user.name prateekrajgautam
                         git config --global user.email prateekrajgautam@gmail.com
                         
                         git clone git@github.com:prateekrajgautam/prateekrajgautam.github.io.git
                         echo "pushed to github/resume"
     			
-    			echo "copying compiled files to new repo and commit changes" 
+    			echo 'copying compiled files to new repo and commit changes'
     			cp -r ./work_folder/PDF ./prateekrajgautam.github.io/PDF
     			rm -rf ./prateekrajgautam.github.io/V01
     			mv ./prateekrajgautam.github.io/PDF ./prateekrajgautam.github.io/V01
     			
-    			echo "commiting and pushing changes"
+    			echo 'commiting and pushing changes'
 			cd prateekrajgautam.github.io
 			git status
 			git add .
