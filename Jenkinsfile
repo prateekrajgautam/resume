@@ -18,6 +18,8 @@ pipeline {
                         cd work_folder
                         chmod +x compileAll.sh CleanUpAux.sh pdftopng.sh
                         bash compileAll.sh
+                        bash CleanUpAux.sh 
+                        bash pdftopng.sh
                         
                         echo 'Build complete!'
                     "
@@ -31,13 +33,7 @@ pipeline {
                 sh '''
                     nix-shell --run "
                         cd work_folder
-                        cd PDF
-                        
-                        # Verify output files exist
-                        test -f Dr.PrateekRajGautam_Resume_2026_V01.pdf && echo '✓ PDF generated'
-                        
-                        # Check PDF validity
-                        #pdfinfo Dr.PrateekRajGautam_Resume_2026_V01.pdf
+                        test -f ./PDF/Dr.PrateekRajGautam_Resume_2026_V01.pdf && echo 'PDF generated'                      
                     "
                 '''
             }
@@ -48,26 +44,19 @@ pipeline {
                 echo 'Deploying...'
                 sh '''
                     nix-shell --run "
-#                       # cd work_folder
-                        
-                        # Or push to GitHub Pages
-                        # git add . && git commit -m 'Update resume' && git push
-                        
-                        # clone prateekrajgautam.github.io
+			echo "cloning prateekrajgautam.github.io"
                         git config --global user.name prateekrajgautam
                         git config --global user.email prateekrajgautam@gmail.com
                         
                         git clone git@github.com:prateekrajgautam/prateekrajgautam.github.io.git
                         echo "pushed to github/resume"
-                        # Optional: Run initial setup commands
-    			# git submodule update --init --recursive
     			
-    			# copy compiled files to new repo and commit changes 
+    			echo "copying compiled files to new repo and commit changes" 
     			cp -r ./work_folder/PDF ./prateekrajgautam.github.io/PDF
     			rm -rf ./prateekrajgautam.github.io/V01
     			mv ./prateekrajgautam.github.io/PDF ./prateekrajgautam.github.io/V01
     			
-    			# commit and push changes
+    			echo "commiting and pushing changes"
 			cd prateekrajgautam.github.io
 			git status
 			git add .
