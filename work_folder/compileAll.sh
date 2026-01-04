@@ -14,13 +14,9 @@ clearaux(){
     done
 }
 
-
-
-for f in $files; do
-    echo "=========================================="
-    echo "Compiling: $f"
-    echo "=========================================="
-    
+compuletex(){
+    f="$1"
+    echo -e "\n  compuletex is Compiling $f"
     pdflatex -interaction=nonstopmode "./$f.tex" || true
     biber ./$f || true
     pdflatex -interaction=nonstopmode "./$f.tex" || true
@@ -32,6 +28,15 @@ for f in $files; do
     else
         echo "✗ Failed to compile $f.pdf"
     fi
+    clearaux
+}
+
+
+for f in $files; do
+    echo "=========================================="
+    echo "Compiling: $f of $files"
+    echo "=========================================="
+    compiletex $f
     clearaux
 done
 
