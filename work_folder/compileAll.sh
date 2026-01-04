@@ -14,7 +14,7 @@ clearaux(){
     done
 }
 
-compuletex(){
+compiletex(){
     f="$1"
     echo -e "\n  compuletex is Compiling $f"
     pdflatex -interaction=nonstopmode "./$f.tex" || true
