@@ -16,11 +16,8 @@ pipeline {
                 sh '''
                     nix-shell --run "
                         cd work_folder
-                        chmod +x compileAll.sh CleanUpAux.sh pdftopng.sh
+                        chmod +x compileAll.sh
                         bash compileAll.sh
-                        bash CleanUpAux.sh 
-                        bash pdftopng.sh
-                        
                         echo 'Build complete!'
                     "
                 '''
@@ -33,7 +30,8 @@ pipeline {
                 sh '''
                     nix-shell --run "
                         cd work_folder
-                        test -f ./PDF/Dr.PrateekRajGautam_Resume_2026_V01.pdf && echo 'PDF generated'                      
+                        cd  PDF
+                        test -f ./Dr.PrateekRajGautam_Resume_2026_V01.pdf && echo 'PDF generated'                      
                     "
                 '''
             }
@@ -45,11 +43,13 @@ pipeline {
                 sh '''
                     nix-shell --run "
 			echo 'cloning prateekrajgautam.github.io'
-                        git config --global user.name prateekrajgautam
-                        git config --global user.email prateekrajgautam@gmail.com
-                        
+			
                         git clone git@github.com:prateekrajgautam/prateekrajgautam.github.io.git
-                        echo "pushed to github/resume"
+                        cd prateekrajgautam.github.io
+                        git config user.name prateekrajgautam
+                        git config user.email prateekrajgautam@gmail.com
+                        cd ..
+                        
     			
     			echo 'copying compiled files to new repo and commit changes'
     			cp -r ./work_folder/PDF ./prateekrajgautam.github.io/PDF

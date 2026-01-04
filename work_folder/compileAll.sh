@@ -7,6 +7,15 @@ echo "Cleaning old PDF directory..."
 rm -rf "./PDF"
 mkdir -p "PDF"
 
+clearaux(){
+    filetypes='aux out log lof lot toc ind ilg idx glo bcf maf ist glsdefs mtc0 mtc gls glg 2i 2o blg run.xml bbl mtc* mlf* mlt* ptc* plf* plt* nav snm synctex.gz'
+    for i in $filetypes; do
+	    rm ./*.$i
+    done
+}
+
+
+
 for f in $files; do
     echo "=========================================="
     echo "Compiling: $f"
@@ -23,21 +32,28 @@ for f in $files; do
     else
         echo "✗ Failed to compile $f.pdf"
     fi
+    clearaux()
 done
 
-# Clean auxiliary files
-./CleanUpAux.sh
+
+
+
 
 # Generate PNG previews
-if [ -f ./pdftopng.sh ]; then
-    cp ./pdftopng.sh ./PDF/pdftopng.sh
-    cd PDF
-    ./pdftopng.sh
-    rm ./pdftopng.sh
-    cd ..
-fi
+cd PDF
+PDF="./Dr.PrateekRajGautam_Resume_2026_V01.pdf" 
+echo "Converting "$PDF" to image" 
+pdftoppm -png -r 300 $PDF PNG && echo -e "Command Completed" 
+ls *.png | xargs -I {} echo {} > imagelist.txt
+cd ..
+
+
 
 echo "=========================================="
 echo "Compilation complete!"
 echo "=========================================="
 ls -lh PDF/*.pdf
+cd ..
+ls -al
+pwd 
+tree
