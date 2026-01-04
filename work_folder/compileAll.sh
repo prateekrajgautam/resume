@@ -40,7 +40,12 @@ done
 
 
 # Generate PNG previews
+echo -e "\nGenerate PNG previews\n\n"
+pwd
 cd PDF
+pwd 
+ls
+
 PDF="./Dr.PrateekRajGautam_Resume_2026_V01.pdf" 
 echo "Converting "$PDF" to image" 
 pdftoppm -png -r 300 $PDF PNG && echo -e "Command Completed" 
