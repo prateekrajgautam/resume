@@ -30,8 +30,9 @@ pipeline {
                 sh '''
                     nix-shell --run "
                         cd work_folder
-                        cd  PDF
-                        test -f ./Dr.PrateekRajGautam_Resume_2026_V01.pdf && echo 'PDF generated'                      
+                        cd PDF
+                        ls
+                        test -f Dr.PrateekRajGautam_Resume_2026_V01.pdf && echo 'PDF generated'                      
                     "
                 '''
             }
