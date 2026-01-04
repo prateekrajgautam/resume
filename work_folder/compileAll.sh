@@ -32,7 +32,7 @@ for f in $files; do
     else
         echo "✗ Failed to compile $f.pdf"
     fi
-    clearaux()
+    clearaux
 done
 
 
