@@ -31,40 +31,61 @@ pipeline {
                     nix-shell --run "
                         cd work_folder
                         cd PDF
-                        ls
                         test -f Dr.PrateekRajGautam_Resume_2026_V01.pdf && echo 'PDF generated'                      
                     "
                 '''
             }
         }
         
-        stage('Push to prateekrajgautam.github.io') {
+        
+        
+        
+        stage('clone and config to prateekrajgautam.github.io') {
             steps {
-                echo 'Deploying...'
+                echo 'Cloining...'
                 sh '''
                     nix-shell --run "
+                    	ls 
+                    	pwd
 			echo 'cloning prateekrajgautam.github.io'
 			
                         git clone git@github.com:prateekrajgautam/prateekrajgautam.github.io.git
                         cd prateekrajgautam.github.io
                         git config user.name prateekrajgautam
                         git config user.email prateekrajgautam@gmail.com
-                        cd ..
-                        
-    			
-    			echo 'copying compiled files to new repo and commit changes'
+                    "
+                '''
+             }
+         }
+     }
+     
+     	stage('copy PDF to V1 in  prateekrajgautam.github.io') {
+            steps {
+                echo 'Copying PDF to V1'
+                sh '''
+                    nix-shell --run "
+             		echo 'copying compiled files to new repo and commit changes'
     			cp -r ./work_folder/PDF ./prateekrajgautam.github.io/PDF
     			rm -rf ./prateekrajgautam.github.io/V01
     			mv ./prateekrajgautam.github.io/PDF ./prateekrajgautam.github.io/V01
+            	    "
+                '''
+             }
+         }
+     }
     			
+    			
+     	stage('Commit and push to prateekrajgautam.github.io') {
+            steps {
+                echo 'Commiting'
+                sh '''
+                    nix-shell --run "
     			echo 'commiting and pushing changes'
 			cd prateekrajgautam.github.io
 			git status
 			git add .
 			git commit -m "Update from resume-jenkins_ data and jenkins buildno"
 			git push # may require some ssh key, idont know if jenkins credential will be available here
-
-
                     "
                 '''
             }
