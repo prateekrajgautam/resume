@@ -14,7 +14,6 @@ pkgs.mkShell{
 	shellHook = ''
 	ls -al
 	pwd
-	#./compileAll.sh
 	'';
 
 
