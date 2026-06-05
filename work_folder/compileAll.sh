@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e  # Exit on any error
 
-files="ListOfPublicationsOnly PlainListOfPublicationsOnly Dr.PrateekRajGautam_Resume_2026_V01 Dr.PrateekRajGautam_Resume_2026_V01_schooling"
+files="ListOfPublicationsOnly PlainListOfPublicationsOnly Dr.PrateekRajGautam_Resume_2026_V01 Dr.PrateekRajGautam_Resume_2026_V01_schooling Dr.PrateekRajGautam_Publications Dr.PrateekRajGautam_References"
 
 echo "Cleaning old PDF directory..."
 rm -rf "./PDF"
